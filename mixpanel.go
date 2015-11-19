@@ -63,10 +63,10 @@ type TopEventsResult struct {
 type CommonEventsResult []string
 
 func NewMixpanelFromEnv() *Mixpanel {
-	return NewMixpanel(os.MustGetEnv("MIXPANEL_API_KEY"), os.MustGetEnv("MIXPANEL_SECRET"))
+	return NewMixpanel(os.Getenv("MIXPANEL_API_KEY"), os.Getenv("MIXPANEL_SECRET"))
 }
 
-func NewMixpanel(apiKey string, secret string) *Mixpanel {
+func NewMixpanel(apiKey, secret string) *Mixpanel {
 	ma, err := NewMixpanelAuth(apiKey, secret)
 	if err != nil {
 		log.Fatal(err)
@@ -78,7 +78,7 @@ func NewMixpanel(apiKey string, secret string) *Mixpanel {
 	return m
 }
 
-func NewMixpanelAuth(apiKey, secret) (*MixpanelAuth, error) {
+func NewMixpanelAuth(apiKey, secret string) (*MixpanelAuth, error) {
 	if apiKey == "" || secret == "" {
 		return nil, errors.New("Mixpanel API credentials not found.")
 	}
