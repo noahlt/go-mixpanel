@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	mp := mixpanel.NewMixpanel()
+	mp := mixpanel.NewMixpanelFromEnv()
 
 	params := map[string]string{
 		"from_date": "2015-01-01",
