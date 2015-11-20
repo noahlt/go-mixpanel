@@ -184,10 +184,14 @@ func (m *Mixpanel) ExportQuery(params map[string]string) ([]ExportQueryResult, e
 	}
 	str := string(bytes)
 	for _, s := range strings.Split(str, "\n") {
+		if s == "" {
+			continue
+		}
 		var result ExportQueryResult
 		err := json.Unmarshal([]byte(s), &result)
 		if err != nil {
-			// ignore this error, extra line or one event being bad
+			log.Printf("BAD EVENT %s -- '%s'\n", err.Error(), s)
+			continue
 		}
 		results = append(results, result)
 	}
