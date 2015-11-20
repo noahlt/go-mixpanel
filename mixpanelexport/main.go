@@ -31,7 +31,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	if 
 	m = mixpanel.NewMixpanelFromEnv()
 	params := map[string]string{
 		"from_date": start,
